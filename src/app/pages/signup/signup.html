@@ -1,0 +1,69 @@
+<main class="auth-page">
+  <section class="brand-panel">
+    <p class="eyebrow">Join the stack</p>
+    <h1>Find your next pair.</h1>
+    <p>Create a profile, swipe the feed, and connect with developers who want to build.</p>
+  </section>
+
+  <section class="auth-card">
+    <p class="eyebrow">New account</p>
+    <h2>Sign up</h2>
+    <p class="subtitle">Takes a minute. Then the cards are yours.</p>
+
+    @if (error()) {
+      <p class="message error">{{ error() }}</p>
+    }
+
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+      <div class="row">
+        <div>
+          <label for="firstName">First name</label>
+          <input id="firstName" formControlName="firstName" placeholder="Ada" />
+          @if (showFieldErrors() && signupForm.controls.firstName.invalid) {
+            <p class="field-error">First name is required</p>
+          }
+        </div>
+        <div>
+          <label for="lastName">Last name</label>
+          <input id="lastName" formControlName="LastName" placeholder="Lovelace" />
+          @if (showFieldErrors() && signupForm.controls.LastName.invalid) {
+            <p class="field-error">Last name is required</p>
+          }
+        </div>
+      </div>
+
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="emailId"
+        placeholder="you@example.com"
+        autocomplete="email"
+      />
+      @if (showFieldErrors() && signupForm.controls.emailId.invalid) {
+        <p class="field-error">Enter a valid email</p>
+      }
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Create a password"
+        autocomplete="new-password"
+      />
+      @if (showFieldErrors() && signupForm.controls.password.invalid) {
+        <p class="field-error">Password must be at least 4 characters</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+
+    <p class="switch">
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
+    </p>
+  </section>
+</main>

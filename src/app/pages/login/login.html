@@ -1,0 +1,57 @@
+<main class="auth-page">
+  <section class="brand-panel">
+    <p class="eyebrow">DevTinder</p>
+    <h1>Ship together.</h1>
+    <p>Swipe through developers, send a connect, and build something worth starring.</p>
+    <ul>
+      <li>Right swipe to connect</li>
+      <li>Left swipe to pass</li>
+      <li>Match when they accept</li>
+    </ul>
+  </section>
+
+  <section class="auth-card">
+    <p class="eyebrow">Welcome back</p>
+    <h2>Sign in</h2>
+    <p class="subtitle">Use the account you created on DevTinder.</p>
+
+    @if (error()) {
+      <p class="message error">{{ error() }}</p>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="emailId"
+        placeholder="you@example.com"
+        autocomplete="email"
+      />
+      @if (showFieldErrors() && loginForm.controls.emailId.invalid) {
+        <p class="field-error">Enter a valid email</p>
+      }
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Your password"
+        autocomplete="current-password"
+      />
+      @if (showFieldErrors() && loginForm.controls.password.invalid) {
+        <p class="field-error">Password is required</p>
+      }
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="switch">
+      New here?
+      <a routerLink="/signup">Create an account</a>
+    </p>
+  </section>
+</main>

@@ -1,0 +1,38 @@
+<section class="page">
+  <p class="eyebrow">Accepted</p>
+  <h1>Matches</h1>
+  <p class="lede">Developers you connected with. Time to ship.</p>
+
+  @if (error()) {
+    <p class="message error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="lede">Loading matches...</p>
+  } @else if (empty()) {
+    <div class="empty">
+      <h2>No matches yet.</h2>
+      <p>Swipe right on Discover, then accept incoming requests to build this list.</p>
+    </div>
+  } @else {
+    <ul class="list">
+      @for (item of items(); track item.user._id) {
+        <li class="item">
+          <app-user-avatar [user]="item.user" tone="clay" />
+          <div>
+            <strong>{{ item.name }}</strong>
+            <div class="skills">
+              @if (item.user.keySkills?.length) {
+                @for (skill of item.user.keySkills; track skill) {
+                  <span>{{ skill }}</span>
+                }
+              } @else {
+                <span class="muted">Connected</span>
+              }
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -1,0 +1,47 @@
+<section class="page">
+  <p class="eyebrow">Incoming</p>
+  <h1>Requests</h1>
+  <p class="lede">These developers swiped right on you. Accept to match.</p>
+
+  @if (error()) {
+    <p class="message error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="lede">Loading requests...</p>
+  } @else if (empty()) {
+    <div class="empty">
+      <h2>No pending requests.</h2>
+      <p>When someone likes your profile, they will land here.</p>
+    </div>
+  } @else {
+    <ul class="list">
+      @for (item of items(); track item.request._id) {
+        <li class="item">
+          <app-user-avatar [user]="item.sender" />
+          <div>
+            <strong>{{ item.name }}</strong>
+            <p>Wants to connect</p>
+          </div>
+          <div class="row-actions">
+            <button
+              type="button"
+              class="ghost"
+              (click)="review('rejected', item.request)"
+              [disabled]="actingId() === item.request._id"
+            >
+              Pass
+            </button>
+            <button
+              type="button"
+              (click)="review('accepted', item.request)"
+              [disabled]="actingId() === item.request._id"
+            >
+              Accept
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

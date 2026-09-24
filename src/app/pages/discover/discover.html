@@ -1,0 +1,77 @@
+<section class="discover">
+  <div class="intro">
+    <p class="eyebrow">Today’s feed</p>
+    <h1>Find a teammate.</h1>
+    <p>Swipe right to connect. Swipe left to pass. Arrows work too.</p>
+  </div>
+
+  @if (error()) {
+    <p class="message error">{{ error() }}</p>
+  }
+  @if (toast()) {
+    <p class="message success toast">{{ toast() }}</p>
+  }
+
+  <div class="deck-wrap">
+    @if (loading() && !current()) {
+      <div class="empty">Loading developers...</div>
+    } @else if (empty()) {
+      <div class="empty">
+        <p class="eyebrow">Caught up</p>
+        <h2>No more cards.</h2>
+        <p>You have seen everyone in the feed. Check requests or come back later.</p>
+      </div>
+    } @else {
+      <div class="deck">
+        @for (user of upcoming(); track user._id; let i = $index) {
+          <article class="card back" [class.back-two]="i === 1">
+            <div class="photo" [ngStyle]="{ background: palette(user._id) }">
+              <span>{{ initialsOf(user) }}</span>
+            </div>
+          </article>
+        }
+
+        <article
+          class="card front"
+          [class.flying-like]="flying() === 'interested'"
+          [class.flying-pass]="flying() === 'ignored'"
+          [class.snap]="snapping()"
+          [style.transform]="cardTransform()"
+          (pointerdown)="onPointerDown($event)"
+          (pointermove)="onPointerMove($event)"
+          (pointerup)="onPointerUp($event)"
+          (pointercancel)="onPointerUp($event)"
+        >
+          @if (current(); as user) {
+            <div class="photo" [ngStyle]="{ background: palette(user._id) }">
+              <span>{{ initialsOf(user) }}</span>
+              <div class="stamp like" [style.opacity]="likeOpacity()">LIKE</div>
+              <div class="stamp pass" [style.opacity]="passOpacity()">NOPE</div>
+            </div>
+            <div class="meta">
+              <h2>{{ nameOf(user) }}</h2>
+              <div class="skills">
+                @if (user.keySkills && user.keySkills.length) {
+                  @for (skill of user.keySkills; track skill) {
+                    <span>{{ skill }}</span>
+                  }
+                } @else {
+                  <span class="muted">Skills not added yet</span>
+                }
+              </div>
+            </div>
+          }
+        </article>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="circle pass" (click)="swipe('ignored')" [disabled]="busy()">
+          ✕
+        </button>
+        <button type="button" class="circle like" (click)="swipe('interested')" [disabled]="busy()">
+          ♥
+        </button>
+      </div>
+    }
+  </div>
+</section>

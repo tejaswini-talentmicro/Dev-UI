@@ -1,0 +1,25 @@
+<div class="app-shell">
+  <header class="topbar">
+    <a routerLink="/discover" class="brand">
+      <span class="mark">dt</span>
+      DevTinder
+    </a>
+
+    <nav class="nav">
+      <a routerLink="/discover" routerLinkActive="active">Discover</a>
+      <a routerLink="/requests" routerLinkActive="active">Requests</a>
+      <a routerLink="/connections" routerLinkActive="active">Matches</a>
+    </nav>
+
+    <div class="session">
+      <span class="who">{{ displayName() }}</span>
+      <button type="button" class="ghost" (click)="logout()" [disabled]="loggingOut()">
+        {{ loggingOut() ? 'Leaving...' : 'Log out' }}
+      </button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <router-outlet />
+  </main>
+</div>

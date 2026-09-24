@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, #f7efe4 0, transparent 32%),
+    radial-gradient(circle at 80% 20%, #dce6d6 0, transparent 28%),
+    #eef2ec;
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  color: #263b32;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: #c96f53;
+  font: 700 0.7rem 'DM Mono', monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+label {
+  display: block;
+  margin: 20px 0 8px;
+  color: #697068;
+  font: 700 0.68rem 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  padding: 13px 0;
+  border: 0;
+  border-bottom: 1px solid #bfc7bb;
+  outline: 0;
+  background: transparent;
+  color: #263b32;
+  font: 1rem 'Manrope', sans-serif;
+}
+
+input:focus {
+  border-color: #c96f53;
+}
+
+button {
+  width: 100%;
+  margin-top: 34px;
+  padding: 15px;
+  border: 0;
+  border-radius: 2px;
+  background: #c96f53;
+  color: #fff8ef;
+  cursor: pointer;
+  font: 700 0.9rem 'Manrope', sans-serif;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+a {
+  color: inherit;
+}
+
+.message {
+  padding: 12px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.error {
+  color: #a04f3e;
+  background: #f7ded6;
+}
+
+.success {
+  color: #56705e;
+  background: #e3ebda;
+}
+
+.field-error {
+  margin: 6px 0 0;
+  color: #a04f3e;
+  font-size: 0.75rem;
+}
