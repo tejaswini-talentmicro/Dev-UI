@@ -6,7 +6,7 @@ import { ConnectionRequest, DevUser, FeedResponse, ListResponse } from './models
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = '/api';
 
   signup(payload: {
     firstName: string;
